@@ -1,0 +1,11 @@
+# Frontend
+dashboard/node_modules/
+dashboard/dist/
+dashboard/.angular/
+
+# Backend
+dashboard-api/target/
+dashboard-api/.mvn/
+
+# System
+.DS_Store
