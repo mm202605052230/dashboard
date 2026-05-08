@@ -1,2 +1,7 @@
 <app-header />
-<router-outlet />
+<div class="flex h-[calc(100vh-4rem)]">
+  <app-side-menu />
+  <main class="flex-1 overflow-auto bg-gray-50">
+    <router-outlet />
+  </main>
+</div>
