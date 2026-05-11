@@ -1,19 +1,24 @@
 import { Routes } from '@angular/router';
-import { Finance } from './pages/finance/finance';
-import { Expenses } from './pages/finance/expenses/expenses';
-import { Crypto } from './pages/crypto/crypto';
-import { Health } from './pages/health/health';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'finance', pathMatch: 'full' },
   {
     path: 'finance',
-    component: Finance,
+    loadComponent: () => import('./pages/finance/finance').then(m => m.Finance),
     children: [
       { path: '', redirectTo: 'expenses', pathMatch: 'full' },
-      { path: 'expenses', component: Expenses },
+      {
+        path: 'expenses',
+        loadComponent: () => import('./pages/finance/expenses/expenses').then(m => m.Expenses),
+      },
     ],
   },
-  { path: 'crypto', component: Crypto },
-  { path: 'health', component: Health },
+  {
+    path: 'crypto',
+    loadComponent: () => import('./pages/crypto/crypto').then(m => m.Crypto),
+  },
+  {
+    path: 'health',
+    loadComponent: () => import('./pages/health/health').then(m => m.Health),
+  },
 ];

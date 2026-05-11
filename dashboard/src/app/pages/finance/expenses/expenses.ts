@@ -1,4 +1,5 @@
-import { Component, inject, signal, computed, OnInit } from '@angular/core';
+import { Component, ChangeDetectionStrategy, inject, signal, computed } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CurrencyPipe, DatePipe, formatCurrency } from '@angular/common';
 import { FinanceService } from '../finance.service';
 import { Expense } from '../finance.models';
@@ -7,10 +8,12 @@ import { DateRangeFilter } from '../../../shared/components/molecules/date-range
 
 @Component({
   selector: 'app-expenses',
+  standalone: true,
   imports: [CurrencyPipe, DatePipe, SummaryCard, DateRangeFilter],
   templateUrl: './expenses.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Expenses implements OnInit {
+export class Expenses {
   private financeService = inject(FinanceService);
 
   expenses = signal<Expense[]>([]);
@@ -36,11 +39,14 @@ export class Expenses implements OnInit {
     this.filteredExpenses().filter(e => e.recurring).reduce((sum, e) => sum + e.amount, 0)
   );
 
-  format(amount: number) {
-    return formatCurrency(amount, 'en-US', '$', 'USD');
+  constructor() {
+    this.financeService
+      .getExpenses()
+      .pipe(takeUntilDestroyed())
+      .subscribe(data => this.expenses.set(data));
   }
 
-  ngOnInit() {
-    this.financeService.getExpenses().subscribe(data => this.expenses.set(data));
+  format(amount: number): string {
+    return formatCurrency(amount, 'en-US', '$', 'USD');
   }
 }

@@ -1,10 +1,11 @@
-import { Component, input, output } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, ChangeDetectionStrategy, input, output } from '@angular/core';
 
 @Component({
   selector: 'app-date-range-filter',
-  imports: [FormsModule],
+  standalone: true,
+  imports: [],
   templateUrl: './date-range-filter.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DateRangeFilter {
   startDate = input.required<string>();

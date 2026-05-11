@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-finance',
+  standalone: true,
   imports: [RouterOutlet],
   template: `
     <div class="p-6">
@@ -10,5 +11,6 @@ import { RouterOutlet } from '@angular/router';
       <router-outlet />
     </div>
   `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Finance {}

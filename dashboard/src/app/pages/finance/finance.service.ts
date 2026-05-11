@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Expense } from './finance.models';
+import { environment } from '../../../environments/environment';
 
 const EXPENSES: Expense[] = [
   { id: '1',  date: '2026-03-03', merchant: 'AWS',             category: 'Infrastructure', amount: 312.45,  currency: 'USD', recurring: true  },
@@ -34,6 +35,9 @@ const EXPENSES: Expense[] = [
 
 @Injectable({ providedIn: 'root' })
 export class FinanceService {
+  // TODO: inject HttpClient and replace with this.http.get<Expense[]>(`${this.apiUrl}/expenses`)
+  private readonly apiUrl = `${environment.apiUrl}/finance`;
+
   getExpenses(): Observable<Expense[]> {
     return of(EXPENSES);
   }

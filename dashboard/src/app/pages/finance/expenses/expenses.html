@@ -13,13 +13,13 @@
   (endDateChange)="endDate.set($event)"
 />
 
-<table class="w-full text-sm text-left">
+<table class="w-full text-sm text-left" aria-label="Expenses">
   <thead>
     <tr class="border-b border-gray-200 text-gray-500 uppercase text-xs tracking-wide">
-      <th class="pb-3 font-medium">Date</th>
-      <th class="pb-3 font-medium">Merchant</th>
-      <th class="pb-3 font-medium">Category</th>
-      <th class="pb-3 font-medium text-right">Amount</th>
+      <th class="pb-3 font-medium" scope="col">Date</th>
+      <th class="pb-3 font-medium" scope="col">Merchant</th>
+      <th class="pb-3 font-medium" scope="col">Category</th>
+      <th class="pb-3 font-medium text-right" scope="col">Amount</th>
     </tr>
   </thead>
   <tbody>
