@@ -1,0 +1,9 @@
+<a
+  [routerLink]="route()"
+  routerLinkActive="bg-gray-700 text-white"
+  class="flex items-center gap-2 ml-8 pl-3 py-2 rounded-lg text-gray-400 hover:bg-gray-700 hover:text-white transition-colors duration-150 cursor-pointer text-sm"
+  ariaCurrentWhenActive="page"
+>
+  <span class="w-1.5 h-1.5 rounded-full bg-current flex-shrink-0"></span>
+  <span class="font-medium">{{ label() }}</span>
+</a>
